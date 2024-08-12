@@ -1,0 +1,33 @@
+{
+  "name": "train-ticket-booking-system",
+  "version": "1.0.0",
+  "description": "An intelligent Train Ticket Booking System made by Node-Express ",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ishraqfatin7/Train-Ticket-Booking-System.git"
+  },
+  "author": "ishraqfatin7",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ishraqfatin7/Train-Ticket-Booking-System/issues"
+  },
+  "homepage": "https://github.com/ishraqfatin7/Train-Ticket-Booking-System#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "http-errors": "^2.0.0",
+    "mongodb": "^6.8.0",
+    "mongoose": "^8.5.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
