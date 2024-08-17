@@ -17,6 +17,19 @@ const userSchema = new mongoose.Schema({
     enum: [roles.admin, roles.user],
     default: roles.user,
   },
+  user_id: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  balance: {
+    type: Number,
+    default: 0,
+  },
 });
 
 userSchema.pre("save", async function (next) {
@@ -27,6 +40,9 @@ userSchema.pre("save", async function (next) {
       this.password = hashedPassword;
       if (this.email === process.env.ADMIN_EMAIL.toLowerCase()) {
         this.role = roles.admin;
+      }
+      if (!this.user_id) {
+        this.user_id = new mongoose.Types.ObjectId().toHexString();
       }
     }
     next();

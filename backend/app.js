@@ -20,6 +20,8 @@ const indexRoute = require("./routes/indexRoute");
 const authRoute = require("./routes/authRoute");
 const userRoute = require("./routes/userRoute");
 const adminRoute = require("./routes/adminRoute");
+const stationRoute = require("./routes/stationRoute");
+const trainRoute = require("./routes/trainRoute");
 
 app.use(
   session({
@@ -38,6 +40,8 @@ app.use("/", indexRoute);
 app.use("/auth", authRoute);
 app.use("/user", ensureLogin, userRoute);
 app.use("/admin", ensureLogin, ensureAdmin, adminRoute);
+app.use("/stations", stationRoute);
+app.use("/trains", trainRoute);
 
 app.use((req, res, next) => {
   next(createHttpError.NotFound());
