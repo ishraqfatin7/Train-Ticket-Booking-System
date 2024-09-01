@@ -22,7 +22,10 @@ const userRoute = require("./routes/userRoute");
 const adminRoute = require("./routes/adminRoute");
 const stationRoute = require("./routes/stationRoute");
 const trainRoute = require("./routes/trainRoute");
+const walletRoute = require("./routes/walletRoute");
+const purchaseRoute = require("./routes/purchaseRoute");
 
+const shortPathRoute = require("./routes/shortestPathRoute");
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "secret",
@@ -42,6 +45,9 @@ app.use("/user", ensureLogin, userRoute);
 app.use("/admin", ensureLogin, ensureAdmin, adminRoute);
 app.use("/stations", stationRoute);
 app.use("/trains", trainRoute);
+app.use("/api/", walletRoute);
+app.use("/purchase", purchaseRoute);
+app.use("/api/routes", shortPathRoute);
 
 app.use((req, res, next) => {
   next(createHttpError.NotFound());

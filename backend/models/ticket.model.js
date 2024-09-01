@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const ticketSchema = new mongoose.Schema({
   wallet_id: { type: Number, required: true },
+  ticket_id: { type: Number, required: true, unique: true },
   stations: [
     {
       station_id: { type: Number, required: true },

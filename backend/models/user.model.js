@@ -17,14 +17,14 @@ const userSchema = new mongoose.Schema({
     enum: [roles.admin, roles.user],
     default: roles.user,
   },
-  user_id: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   name: {
     type: String,
     required: true,
+  },
+  wallet_id: {
+    type: Number,
+    //required: true,
+    unique: true,
   },
   balance: {
     type: Number,
@@ -41,9 +41,22 @@ userSchema.pre("save", async function (next) {
       if (this.email === process.env.ADMIN_EMAIL.toLowerCase()) {
         this.role = roles.admin;
       }
-      if (!this.user_id) {
-        this.user_id = new mongoose.Types.ObjectId().toHexString();
+      if (!this.wallet_id) {
+        // Generate a random wallet_id only number between 1 and 1000000
+        this.wallet_id = Math.floor(Math.random() * 1000000) + 1;
+        console.log(this.wallet_id);
       }
+    }
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
+userSchema.pre("findOneAndUpdate", async function (next) {
+  try {
+    if (this.balance < 0) {
+      return next(new Error("Insufficient balance"));
     }
     next();
   } catch (err) {
