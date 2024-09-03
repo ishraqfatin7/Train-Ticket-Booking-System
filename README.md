@@ -40,7 +40,7 @@ The system supports real-time updates, integrates with digital wallets for seaml
 
 ## ER Diagram
 
-![ER Diagram](https://i.ibb.co/mCwnQyC/ERD.png)
+[![ER Diagram](https://i.ibb.co/mCwnQyC/ERD.png)](https://i.ibb.co/mCwnQyC/ERD.png)
 
 ## Technologies
 
@@ -123,4 +123,4 @@ Contributions are what make the open-source community such an amazing place to l
 
 ## 🔗 Links
 
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/fatin-ishraq)
