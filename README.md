@@ -40,7 +40,7 @@ The system supports real-time updates, integrates with digital wallets for seaml
 
 ## ER Diagram
 
-![ER Diagram](\backend\public\ERD.png)
+![ER Diagram](https://i.ibb.co/mCwnQyC/ERD.png)
 
 ## Technologies
 
