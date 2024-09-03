@@ -69,9 +69,7 @@ router.get("/paths/:from/:to", async (req, res) => {
       path.unshift(currentStation);
       currentStation = previous[currentStation];
     }
-
     if (path[0] === startStation) {
-      //send path and distance
       res.json({
         path,
         distance: distances[targetStation],

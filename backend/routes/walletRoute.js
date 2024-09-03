@@ -2,7 +2,7 @@ const router = require("express").Router();
 const User = require("../models/user.model");
 
 // Get Wallet Balance
-router.get("/wallets/:wallet_id", async (req, res) => {
+router.get("/:wallet_id", async (req, res) => {
   const walletId = parseInt(req.params.wallet_id);
   try {
     const user = await User.findOne({ wallet_id: walletId });
@@ -25,7 +25,7 @@ router.get("/wallets/:wallet_id", async (req, res) => {
 });
 
 // Add Wallet Balance
-router.put("/wallets/:wallet_id", async (req, res) => {
+router.put("/:wallet_id", async (req, res) => {
   const walletId = parseInt(req.params.wallet_id);
   const rechargeAmount = parseInt(req.body.recharge);
 

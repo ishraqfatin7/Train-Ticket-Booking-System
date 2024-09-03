@@ -39,3 +39,5 @@ passport.deserializeUser(function (user, cb) {
     return cb(null, user);
   });
 });
+
+module.exports = passport;

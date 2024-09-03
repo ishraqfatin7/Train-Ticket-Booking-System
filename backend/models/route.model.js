@@ -20,6 +20,10 @@ const RouteSchema = new mongoose.Schema({
         type: Number,
         //required: true,
       },
+      fare: {
+        type: Number,
+        //required: true,
+      },
     },
   ],
 });

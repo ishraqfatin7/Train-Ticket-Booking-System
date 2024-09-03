@@ -1,31 +1,28 @@
 const express = require("express");
-const createHttpError = require("http-errors");
 const morgan = require("morgan");
-const mongoose = require("mongoose");
 const passport = require("passport");
 const session = require("express-session");
+const cors = require("cors");
+
+const compression = require("compression");
 require("dotenv").config();
+const port = 8000;
+
+const routes = require("./routes/indexRoute");
+const { notFoundHandler, errorHandler } = require("./middlewares/errorHandler");
+const connectDB = require("./utils/db");
+const rateLimiter = require("./middlewares/rateLimiter");
+
 const app = express();
+
 app.use(express.json());
 app.use(morgan("dev"));
-const port = 8000;
-const cors = require("cors");
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
-const {
-  ensureLogin,
-  ensureAdmin,
-} = require("./middlewares/ensureAdmin.middleware");
-const indexRoute = require("./routes/indexRoute");
-const authRoute = require("./routes/authRoute");
-const userRoute = require("./routes/userRoute");
-const adminRoute = require("./routes/adminRoute");
-const stationRoute = require("./routes/stationRoute");
-const trainRoute = require("./routes/trainRoute");
-const walletRoute = require("./routes/walletRoute");
-const purchaseRoute = require("./routes/purchaseRoute");
 
-const shortPathRoute = require("./routes/shortestPathRoute");
+app.use(rateLimiter);
+app.use(compression());
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "secret",
@@ -39,31 +36,12 @@ app.use(passport.initialize());
 app.use(passport.authenticate("session"));
 require("./utils/passport.auth");
 
-app.use("/", indexRoute);
-app.use("/auth", authRoute);
-app.use("/user", ensureLogin, userRoute);
-app.use("/admin", ensureLogin, ensureAdmin, adminRoute);
-app.use("/stations", stationRoute);
-app.use("/trains", trainRoute);
-app.use("/api/", walletRoute);
-app.use("/purchase", purchaseRoute);
-app.use("/api/routes", shortPathRoute);
+app.use(routes);
 
-app.use((req, res, next) => {
-  next(createHttpError.NotFound());
-});
-app.use((err, req, res, next) => {
-  res.status(err.status || 500);
-  res.send({
-    error: {
-      status: err.status || 500,
-      message: err.message,
-    },
-  });
-});
+app.use(notFoundHandler);
+app.use(errorHandler);
 
-mongoose.connect(process.env.MONGO_URI, {}).then(() => {
-  console.log("Connected to Database");
+connectDB().then(() => {
   app.listen(port, () => {
     console.log("Booking System Online.");
   });
