@@ -68,8 +68,8 @@ To run this project, you will need to add the following environment variables to
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/yourusername/samurai-train-backend.git
-   cd samurai-train-backend
+   git clone https://github.com/ishraqfatin7/Train-Ticket-Booking-System.git
+   cd Train-Ticket-Booking-System.git/backend
    ```
 
 2. **Install Dependencies**:
