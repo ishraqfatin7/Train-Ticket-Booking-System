@@ -12,10 +12,7 @@ router.get("/paths/:from/:to", async (req, res) => {
   const targetStation = parseInt(to, 10);
 
   try {
-    // Fetch all routes from the database
     const routes = await Route.find({});
-
-    // Build the graph
     const graph = {};
     routes.forEach((route) => {
       const { station_from, connections } = route;

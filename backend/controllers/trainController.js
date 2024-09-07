@@ -2,7 +2,7 @@ const Train = require("../models/train.model");
 const Route = require("../models/route.model");
 
 class TrainController {
-  static async createTrain(req, res) {
+  async createTrain(req, res) {
     try {
       const train = new Train(req.body);
       await train.save();
@@ -23,7 +23,7 @@ class TrainController {
     }
   }
 
-  static async getTrains(req, res) {
+  async getTrains(req, res) {
     try {
       const trains = await Train.find().sort({ train_id: 1 });
       res.status(200).json(trains);
@@ -32,7 +32,7 @@ class TrainController {
     }
   }
 
-  static async createRoute(req, res) {
+  async createRoute(req, res) {
     try {
       const route = new Route(req.body);
       await route.save();
@@ -42,7 +42,7 @@ class TrainController {
     }
   }
 
-  static async getRoutes(req, res) {
+  async getRoutes(req, res) {
     try {
       const routes = await Route.find().sort({ route_id: 1 });
       res.status(200).json(routes);
@@ -51,7 +51,7 @@ class TrainController {
     }
   }
 
-  static async getTrainById(req, res) {
+  async getTrainById(req, res) {
     const trainId = parseInt(req.params.train_id);
     try {
       const train = await Train.findOne({ train_id: trainId });
@@ -65,4 +65,4 @@ class TrainController {
   }
 }
 
-module.exports = TrainController;
+module.exports = new TrainController();
